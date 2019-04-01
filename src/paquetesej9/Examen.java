@@ -62,7 +62,6 @@ public class Examen implements Comparable<Examen> {
 
 		this.clave = new Clave(fecha, horainicio);
 
-
 	}
 
 	public String toString() {
@@ -97,8 +96,8 @@ public class Examen implements Comparable<Examen> {
 		return clave;
 	}
 
-	//Apartado 5
-	
+	// Apartado 5
+
 	@Override
 	public int compareTo(Examen examen) {
 
@@ -131,12 +130,5 @@ public class Examen implements Comparable<Examen> {
 		}
 
 	}
-	
-	
+
 }
-
-
-
-
-	
-

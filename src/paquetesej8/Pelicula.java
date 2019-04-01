@@ -20,6 +20,8 @@ public class Pelicula implements Comparable<Pelicula> {
 	private String nombre;
 
 	private LocalDate fechaestreno;
+	
+	private LocalDate fechaDVD;
 
 	Clave getClave() {
 		return clave;
@@ -37,12 +39,16 @@ public class Pelicula implements Comparable<Pelicula> {
 		return fechaDVD;
 	}
 
-	private LocalDate fechaDVD;
+	
 
 	public String toString() {
-		
-		return String.format("%-40s%-40s%-40s%-40s%-40s", clave.toString().charAt(0) == 'T'?"TERROR":clave.toString().charAt(0) == 'C'?"COMEDIA":"FICCION", nombre, "Clave: " + clave.toString(), "Fecha Estreno: " + fechaFormateada.format(fechaestreno), "Fecha DVD: " +fechaFormateada.format(fechaDVD));
-		
+
+		return String.format("%-40s%-40s%-40s%-40s%-40s",
+				clave.toString().charAt(0) == 'T' ? "TERROR"
+						: clave.toString().charAt(0) == 'C' ? "COMEDIA" : "FICCION",
+				nombre, "Clave: " + clave.toString(), "Fecha Estreno: " + fechaFormateada.format(fechaestreno),
+				"Fecha DVD: " + fechaFormateada.format(fechaDVD));
+
 	}
 
 	public Pelicula(String nombre, Genero genero, LocalDate fechaestreno, LocalDate fechaDVD) {
@@ -79,12 +85,12 @@ public class Pelicula implements Comparable<Pelicula> {
 		}
 
 	}
-	
-	Integer numdias () {
-		
-		return (int)ChronoUnit.DAYS.between(fechaestreno, fechaDVD);
-		
-		}
+
+	Integer numdias() {
+
+		return (int) ChronoUnit.DAYS.between(fechaestreno, fechaDVD);
+
+	}
 
 	@Override
 	public int hashCode() {
@@ -117,7 +123,5 @@ public class Pelicula implements Comparable<Pelicula> {
 	public int compareTo(Pelicula peli) {
 		return 0;
 	}
-
-
 
 }
