@@ -78,10 +78,10 @@ public class Menu {
 				break;
 
 			case 6:
-				for (int i = 0; i < lista.size(); i++) {
-
-					System.out.println(lista.get(i));
-
+				for (String cadena : lista) {
+					
+					System.out.println(cadena);
+					
 				}
 
 				break;

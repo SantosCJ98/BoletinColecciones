@@ -5,6 +5,8 @@ import teclado.Teclado.Rangos;
 import static teclado.Teclado.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.ListIterator;
 
 public class Menu {
 
@@ -16,8 +18,6 @@ public class Menu {
 
 	public static void menu() {
 
-		boolean primerelemento = true;
-
 		ArrayList<Float> lista = new ArrayList<>();
 
 		lista.add(2.5f);
@@ -26,9 +26,11 @@ public class Menu {
 
 		lista.add(10.27f);
 
+		ListIterator<Float> itera = lista.listIterator();
+
 		int opcion = 0;
 
-		int indice = 0;
+		boolean mostrado = false;
 
 		while (opcion != 5) {
 
@@ -37,98 +39,76 @@ public class Menu {
 
 			opcion = readRange(1, 5, Rangos.AMBOSIN);
 
-			switch (opcion) {
+			if (opcion != 4 && lista.isEmpty()) {
 
-			case 1:
-				for (int i = 0; i < lista.size(); i++) {
+				System.out.println("No hay elementos en la lista");
 
-					System.out.println(lista.get(i));
+			}
 
-				}
+			else {
 
-				break;
+				switch (opcion) {
 
-			case 2:
+				case 1:
+					for (Float decimal : lista) {
 
-				if (lista.size() >= 1) {
+						System.out.println(decimal);
 
-					if (primerelemento) {
+					}
 
-						System.out.println(lista.get(indice));
+					break;
 
-						primerelemento = false;
+				case 2:
+
+					if (itera.hasNext()) {
+
+						System.out.println(itera.next());
 
 					}
 
 					else {
 
-						if (indice == lista.size() - 1) {
+						itera = lista.listIterator();
 
-							indice = 0;
-
-						}
-
-						else {
-
-							indice++;
-
-						}
-
-						System.out.println(lista.get(indice));
+						System.out.println(itera.next());
 
 					}
 
-				}
+					mostrado = true;
 
-				break;
+					break;
 
-			case 3:
+				case 3:
 
-				if (lista.size() >= 1) {
+					if (itera.hasPrevious()) {
 
-					if (primerelemento) {
-
-						System.out.println(lista.get(indice));
-
-						primerelemento = false;
+						System.out.println(itera.previous());
 
 					}
 
 					else {
 
-						if (indice == lista.size() - 1) {
+						itera = lista.listIterator(lista.size());
 
-							indice--;
-
-						}
-
-						else if (indice == 0) {
-
-							indice = lista.size() - 1;
-
-						}
-
-						else {
-
-							indice--;
-
-						}
-
-						System.out.println(lista.get(indice));
+						System.out.println(itera.previous());
 
 					}
 
-				}
+					mostrado = true;
 
-				break;
+					break;
 
-			case 4:
+				case 4:
 
-				if (lista.size() >= 1) {
+					if (mostrado) {
 
-					lista.remove(indice);
+						itera.remove();
 
-					indice /= 2;
+						mostrado = false;
+
+					}
+
+					break;
 
 				}
 

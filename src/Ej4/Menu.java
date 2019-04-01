@@ -5,6 +5,8 @@ import teclado.Teclado.Rangos;
 import static teclado.Teclado.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 public class Menu {
 
@@ -16,7 +18,7 @@ public class Menu {
 
 	public static void menu() {
 
-		ArrayList<Float> lista = new ArrayList<>();
+		Collection<Float> lista = new ArrayList<>();
 
 		lista.add(2.5f);
 
@@ -24,52 +26,69 @@ public class Menu {
 
 		lista.add(10.27f);
 
+		Iterator<Float> itera = lista.iterator();
+
 		int opcion = 0;
 
-		int indice = 0;
+		boolean mostrado = false;
 
-		while (opcion != 5) {
+		while (opcion != 4) {
 
 			System.out.println("1. Mostrar la lista\n2. Mostrar siguiente\n3. Eliminar ultimo mostrado\n4. Salir");
 
 			opcion = readRange(1, 5, Rangos.AMBOSIN);
 
-			switch (opcion) {
+			if (opcion != 4 && lista.isEmpty()) {
 
-			case 1:
-				for (int i = 0; i < lista.size(); i++) {
+				System.out.println("No hay elementos en la lista");
 
-					System.out.println(lista.get(i));
+			}
 
-				}
+			else {
 
-				break;
+				switch (opcion) {
 
-			case 2:
+				case 1:
 
-				if (lista.size() >= 1) {
+					for (Float decimal : lista) {
 
-					System.out.println(lista.get(indice));
-
-					indice++;
-
-					if (indice >= lista.size()) {
-
-						indice = 0;
+						System.out.println(decimal);
 
 					}
 
-				}
+					break;
 
-				break;
+				case 2:
 
-			case 3:
+					if (itera.hasNext()) {
 
-				if (lista.size() >= 1) {
+						System.out.println(itera.next());
 
-					lista.remove(indice);
+					}
 
-					indice /= 2;
+					else {
+
+						itera = lista.iterator();
+
+						System.out.println(itera.next());
+
+					}
+
+					mostrado = true;
+
+					break;
+
+				case 3:
+
+					if (mostrado) {
+
+						itera.remove();
+
+						mostrado = false;
+
+					}
+
+					break;
 
 				}
 
