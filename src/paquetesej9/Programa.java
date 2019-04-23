@@ -327,7 +327,7 @@ public class Programa {
 
 			case 8:
 
-				Map<String, Examen> examenes11 = new HashMap<>();
+				Map<String, Examen> examenes11 = new TreeMap<>();
 
 				examenes11.put(ex1.getClave().toString(), ex1);
 
@@ -347,9 +347,7 @@ public class Programa {
 
 				examenes11.put(ex5.getClave().toString(), ex5);
 
-				TreeMap<String, Examen> ordenado = new TreeMap<>(examenes11);
-
-				for (Map.Entry<String, Examen> Examen : ordenado.entrySet()) {
+				for (Map.Entry<String, Examen> Examen : examenes11.entrySet()) {
 
 					System.out.println(Examen.getValue().toString());
 
