@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class Empleado implements Comparable<Empleado> {
-	
+
 	DateTimeFormatter fechaformat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	private static int jefe = 0;
@@ -86,24 +86,22 @@ public class Empleado implements Comparable<Empleado> {
 	private LocalDate fechaalta;
 
 	private LocalDate fechabaja;
-	
-	Integer numdias () {
-		
+
+	Integer numdias() {
+
 		if (fechabaja != null) {
-			
-			return (int)ChronoUnit.DAYS.between(fechaalta, fechabaja);
-			
+
+			return (int) ChronoUnit.DAYS.between(fechaalta, fechabaja);
+
 		}
-		
+
 		else {
-			
-			return (int)ChronoUnit.DAYS.between(fechaalta, LocalDate.now());
-			
+
+			return (int) ChronoUnit.DAYS.between(fechaalta, LocalDate.now());
+
 		}
-		
-		
-		
-		}
+
+	}
 
 	Clave getClave() {
 		return clave;
@@ -120,29 +118,35 @@ public class Empleado implements Comparable<Empleado> {
 	private LocalDate getFechabaja() {
 		return fechabaja;
 	}
-	
+
 	public String toString() {
-		
-		return String.format("%-50s%-50s%-50s%-50s%-50s%-50s", getClave().toString().charAt(0) == 'J'?"JEFE":getClave().toString().charAt(0) == 'D'?"EMPLEADO":"ENCARGADO", "Nombre: " + getNombre(), "Clave: " + getClave().toString(), "Fecha alta: " + fechaformat.format(fechaalta), fechabaja == null ? "Fecha baja: no tiene":"Fecha baja " + fechaformat.format(fechabaja), "Dias trabajados: " + numdias());
-		
+
+		return String.format("%-50s%-50s%-50s%-50s%-50s%-50s",
+				getClave().toString().charAt(0) == 'J' ? "JEFE"
+						: getClave().toString().charAt(0) == 'D' ? "EMPLEADO" : "ENCARGADO",
+				"Nombre: " + getNombre(), "Clave: " + getClave().toString(),
+				"Fecha alta: " + fechaformat.format(fechaalta),
+				fechabaja == null ? "Fecha baja: no tiene" : "Fecha baja " + fechaformat.format(fechabaja),
+				"Dias trabajados: " + numdias());
+
 	}
-	
-	//Apartado 1
+
+	// Apartado 1
 
 	@Override
 	public int compareTo(Empleado emp1) {
 		return emp1.numdias().compareTo(this.numdias());
 	}
-	
-	//Apartado 2
-	
+
+	// Apartado 2
+
 //	@Override
 //	public int compareTo(Empleado emp1) {
 //		return this.getNombre().compareTo(emp1.getNombre());
 //	}
-	
-	//Apartado 3
-	
+
+	// Apartado 3
+
 //		@Override
 //		public int compareTo(Empleado empleado) {
 //			
@@ -180,8 +184,5 @@ public class Empleado implements Comparable<Empleado> {
 //				
 //				
 //			}
-			
-			
-		}
 
-
+}
