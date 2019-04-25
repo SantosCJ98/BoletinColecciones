@@ -42,13 +42,9 @@ public class Pelicula implements Comparable<Pelicula> {
 	
 
 	public String toString() {
-
-		return String.format("%-40s%-40s%-40s%-40s%-40s",
-				clave.toString().charAt(0) == 'T' ? "TERROR"
-						: clave.toString().charAt(0) == 'C' ? "COMEDIA" : "FICCION",
-				nombre, "Clave: " + clave.toString(), "Fecha Estreno: " + fechaFormateada.format(fechaestreno),
-				"Fecha DVD: " + fechaFormateada.format(fechaDVD));
-
+		
+		return String.format("%-40s%-40s%-40s%-40s%-40s", clave.toString().charAt(0) == 'T'?"TERROR":clave.toString().charAt(0) == 'C'?"COMEDIA":"FICCION", nombre, "Clave: " + clave.toString(), "Fecha Estreno: " + fechaFormateada.format(fechaestreno), "Fecha DVD: " +fechaFormateada.format(fechaDVD));
+		
 	}
 
 	public Pelicula(String nombre, Genero genero, LocalDate fechaestreno, LocalDate fechaDVD) {
@@ -56,6 +52,18 @@ public class Pelicula implements Comparable<Pelicula> {
 		this.clave = asignarClave(genero);
 		this.fechaestreno = fechaestreno;
 		this.fechaDVD = fechaDVD;
+	}
+	
+	public Pelicula(Pelicula original) {
+		
+		nombre = original.nombre;
+		
+		clave = original.clave;
+		
+		fechaestreno = original.fechaestreno;
+		
+		fechaDVD = original.fechaDVD;
+		
 	}
 
 	private Clave asignarClave(Genero genero) {
@@ -85,12 +93,12 @@ public class Pelicula implements Comparable<Pelicula> {
 		}
 
 	}
-
-	Integer numdias() {
-
-		return (int) ChronoUnit.DAYS.between(fechaestreno, fechaDVD);
-
-	}
+	
+	Integer numdias () {
+		
+		return (int)ChronoUnit.DAYS.between(fechaestreno, fechaDVD);
+		
+		}
 
 	@Override
 	public int hashCode() {
@@ -117,11 +125,22 @@ public class Pelicula implements Comparable<Pelicula> {
 		return true;
 	}
 
-//	//Apartado 1
-//	
+	
 	@Override
 	public int compareTo(Pelicula peli) {
-		return 0;
+		
+		int resultado = Integer.compare(numdias(), peli.numdias());
+		
+		if (resultado != 0) {
+			
+			return resultado;
+			
+		}
+		
+		return getNombre().compareTo(peli.getNombre());
+		
 	}
+
+
 
 }
