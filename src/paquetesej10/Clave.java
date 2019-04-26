@@ -12,87 +12,34 @@ public class Clave implements Comparable<Clave> {
 
 	private Categoria categoria;
 
-	private Integer numero;
+	private int numero;
 
 	private Categoria getCategoria() {
 		return categoria;
 	}
 
-	Integer getNumero() {
+	private int getNumero() {
 		return numero;
 	}
 
 	public String toString() {
 
-		return String.format("%c%d", categoria.getCodigo(), (int) getNumero());
+		return String.format("%c%d", getCategoria().getCodigo(), (int) getNumero());
 
 	}
-	
+
+	@Override
 	public int compareTo(Clave clave) {
-
-		if (this.toString().charAt(0) == 'J'
-				&& clave.toString().charAt(0) == 'D') {
-
-			return -1;
-
+		
+		int resultado = getCategoria().compareTo(clave.getCategoria());
+		
+		if (resultado != 0) {
+			
+			return resultado;
+			
 		}
-
-		else if (this.toString().charAt(0) == 'J'
-				&& clave.toString().charAt(0) == 'E') {
-
-			return -1;
-
-		}
-
-		else if (this.toString().charAt(0) == 'E'
-				&& clave.toString().charAt(0) == 'D') {
-
-			return -1;
-
-		}
-
-		else if (this.toString().charAt(0) == 'E'
-				&& clave.toString().charAt(0) == 'J') {
-
-			return 1;
-
-		}
-
-		else if (this.toString().charAt(0) == 'D'
-				&& clave.toString().charAt(0) == 'J') {
-
-			return 1;
-
-		}
-
-		else if (this.toString().charAt(0) == 'D'
-				&& clave.toString().charAt(0) == 'E') {
-
-			return 1;
-
-		}
-
-		else {
-
-			if (this.getNumero() < clave.getNumero()) {
-
-				return -1;
-
-			}
-
-			else if (this.getNumero() > clave.getNumero()) {
-
-				return 1;
-
-			}
-
-			else {
-
-				return 0;
-
-			}
-
-		}
+		
+		return Integer.compare(getNumero(), clave.getNumero());
 
 	}
 

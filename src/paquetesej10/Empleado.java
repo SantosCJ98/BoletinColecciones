@@ -6,8 +6,6 @@ import java.time.temporal.ChronoUnit;
 
 public class Empleado implements Comparable<Empleado> {
 
-	DateTimeFormatter fechaformat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
 	private static int jefe = 0;
 
 	private static int empleado = 0;
@@ -24,6 +22,34 @@ public class Empleado implements Comparable<Empleado> {
 
 		this.fechabaja = fechabaja;
 
+	}
+	
+	Empleado(Empleado original) {
+		
+		nombre = original.nombre;
+		
+		clave = original.clave;
+		
+		fechaalta = original.fechaalta;
+		
+		fechabaja = original.fechabaja;
+		
+	}
+
+	Clave getClave() {
+		return clave;
+	}
+
+	String getNombre() {
+		return nombre;
+	}
+
+	private LocalDate getFechaalta() {
+		return fechaalta;
+	}
+
+	private LocalDate getFechabaja() {
+		return fechabaja;
 	}
 
 	private Clave asignarClave(Categoria categoria) {
@@ -54,6 +80,49 @@ public class Empleado implements Comparable<Empleado> {
 
 	}
 
+	private Clave clave;
+
+	private String nombre;
+
+	private LocalDate fechaalta;
+
+	private LocalDate fechabaja;
+
+	private int numdias() {
+
+		if (fechabaja != null) {
+
+			return (int) ChronoUnit.DAYS.between(fechaalta, fechabaja);
+
+		}
+
+		else {
+
+			return (int) ChronoUnit.DAYS.between(fechaalta, LocalDate.now());
+
+		}
+
+	}
+
+	public String toString() {
+
+		DateTimeFormatter fechaformat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+		return String.format("%-50s%-50s%-50s%-50s%-50s%-50s",
+				getClave().toString().charAt(0) == 'J' ? "JEFE"
+						: getClave().toString().charAt(0) == 'D' ? "EMPLEADO" : "ENCARGADO",
+				"Nombre: " + getNombre(), "Clave: " + getClave().toString(),
+				"Fecha alta: " + fechaformat.format(fechaalta),
+				fechabaja == null ? "Fecha baja: no tiene" : "Fecha baja: " + fechaformat.format(fechabaja),
+				"Dias trabajados: " + numdias());
+
+	}
+
+	@Override
+	public int compareTo(Empleado emp1) {
+		return Integer.compare(emp1.numdias(), numdias());
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -78,111 +147,5 @@ public class Empleado implements Comparable<Empleado> {
 			return false;
 		return true;
 	}
-
-	private Clave clave;
-
-	private String nombre;
-
-	private LocalDate fechaalta;
-
-	private LocalDate fechabaja;
-
-	Integer numdias() {
-
-		if (fechabaja != null) {
-
-			return (int) ChronoUnit.DAYS.between(fechaalta, fechabaja);
-
-		}
-
-		else {
-
-			return (int) ChronoUnit.DAYS.between(fechaalta, LocalDate.now());
-
-		}
-
-	}
-
-	Clave getClave() {
-		return clave;
-	}
-
-	String getNombre() {
-		return nombre;
-	}
-
-	private LocalDate getFechaalta() {
-		return fechaalta;
-	}
-
-	private LocalDate getFechabaja() {
-		return fechabaja;
-	}
-
-	public String toString() {
-
-		return String.format("%-50s%-50s%-50s%-50s%-50s%-50s",
-				getClave().toString().charAt(0) == 'J' ? "JEFE"
-						: getClave().toString().charAt(0) == 'D' ? "EMPLEADO" : "ENCARGADO",
-				"Nombre: " + getNombre(), "Clave: " + getClave().toString(),
-				"Fecha alta: " + fechaformat.format(fechaalta),
-				fechabaja == null ? "Fecha baja: no tiene" : "Fecha baja " + fechaformat.format(fechabaja),
-				"Dias trabajados: " + numdias());
-
-	}
-
-	// Apartado 1
-
-	@Override
-	public int compareTo(Empleado emp1) {
-		return emp1.numdias().compareTo(this.numdias());
-	}
-
-	// Apartado 2
-
-//	@Override
-//	public int compareTo(Empleado emp1) {
-//		return this.getNombre().compareTo(emp1.getNombre());
-//	}
-
-	// Apartado 3
-
-//		@Override
-//		public int compareTo(Empleado empleado) {
-//			
-//			if (this.getClave().toString().charAt(0) > empleado.getClave().toString().charAt(0))  {
-//				
-//				return -1;	
-//				
-//			}
-//			
-//			else if (this.getClave().toString().charAt(0) < empleado.getClave().toString().charAt(0))  {
-//				
-//				return 1;	
-//				
-//			}
-//			
-//			else {
-//				
-//				if (this.getClave().getNumero() < empleado.getClave().getNumero()) {
-//					
-//					return -1;
-//					
-//				}
-//				
-//				else if (this.getClave().getNumero() > empleado.getClave().getNumero()) {
-//					
-//					return 1;
-//					
-//				}
-//				
-//				else {
-//					
-//					return 0;
-//					
-//				}
-//				
-//				
-//			}
 
 }

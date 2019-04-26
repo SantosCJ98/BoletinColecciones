@@ -2,17 +2,7 @@ package paquetesej10;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 import static teclado.Teclado.*;
 
@@ -21,6 +11,10 @@ public class Arboles {
 	public static void menu() {
 
 		int opcion = 0;
+
+		Set<Empleado> arbol;
+
+		Map<Clave, Empleado> mapa;
 
 		Empleado e1 = new Empleado("Pepe", Categoria.EMPLEADO, LocalDate.of(2011, Month.MAY, 21),
 				LocalDate.of(2013, Month.APRIL, 22));
@@ -45,137 +39,79 @@ public class Arboles {
 		Empleado e9 = new Empleado("Antonio", Categoria.ENCARGADO, LocalDate.of(2011, Month.JANUARY, 28),
 				LocalDate.of(2014, Month.MAY, 14));
 
-		while (opcion != 4) {
+		Empleado e10 = new Empleado(e1);
 
-			System.out.println(
-					"1. Ordenar por días trabajados\n2. Orden alfabético ascendente\n3. Ordenar por clave\n4. Salir");
+		Empleado e11 = new Empleado(e5);
 
-			opcion = readRange(1, 4, Rangos.AMBOSIN);
+		Empleado e12 = new Empleado(e6);
+		
+		do {
 
-			switch (opcion) {
+		System.out.println("1. Ordenar por días trabajados\n2. Orden alfabético ascendente\n3. Ordenar por clave\n4. Salir");
 
-			case 1:
+		opcion = readRange(1, 4, Rangos.AMBOSIN);
 
-				TreeSet<Empleado> plantilla = new TreeSet<>();
+		switch (opcion) {
 
-				plantilla.add(e1);
+		case 1:
 
-				plantilla.add(e2);
+			arbol = new TreeSet<>(Set.of(e1, e2, e3, e4, e5, e6, e7, e8, e9));
 
-				plantilla.add(e3);
+			arbol.add(e10);
 
-				plantilla.add(e4);
+			arbol.add(e11);
 
-				plantilla.add(e5);
+			arbol.add(e12);
 
-				plantilla.add(e6);
+			for (Empleado empleado : arbol) {
 
-				plantilla.add(e7);
+				System.out.println(empleado.toString());
 
-				plantilla.add(e8);
+			}
 
-				plantilla.add(e9);
+			break;
 
-				plantilla.add(e1);
+		case 2:
 
-				plantilla.add(e5);
+			arbol = new TreeSet<>((emp1, emp2) -> {
 
-				plantilla.add(e6);
+				return emp2.getNombre().compareTo(emp1.getNombre());
 
-				for (Empleado empleado : plantilla) {
+			});
 
-					System.out.println(empleado.toString());
+			arbol = Set.of(e1, e2, e3, e4, e5, e6, e7, e8, e9);
+			
+			//No permite introducir duplicados
+			
 
-				}
+			for (Empleado empleado : arbol) {
 
-				break;
+				System.out.println(empleado.toString());
 
-			case 2:
+			}
 
-				TreeSet<Empleado> plantilla2 = new TreeSet<>();
+			break;
 
-				plantilla2.add(e1);
+		case 3:
 
-				plantilla2.add(e2);
+			mapa = new TreeMap<>(Map.of(e1.getClave(), e1, e2.getClave(), e2, e3.getClave(), e3, e4.getClave(), e4,
+					e5.getClave(), e5, e6.getClave(), e6, e7.getClave(), e7, e8.getClave(), e8, e9.getClave(), e9));
 
-				plantilla2.add(e3);
+			mapa.put(e10.getClave(), e10);
 
-				plantilla2.add(e4);
+			mapa.put(e11.getClave(), e11);
 
-				plantilla2.add(e5);
+			mapa.put(e12.getClave(), e12);
 
-				plantilla2.add(e6);
+			for (Map.Entry<Clave, Empleado> plantillaforeach : mapa.entrySet()) {
 
-				plantilla2.add(e7);
-
-				plantilla2.add(e8);
-
-				plantilla2.add(e9);
-
-				plantilla2.add(e1);
-
-				plantilla2.add(e5);
-
-				plantilla2.add(e6);
-
-				List<Empleado> plantilla3 = new ArrayList<>(plantilla2);
-
-				Collections.sort(plantilla3, new Comparator<Empleado>() {
-
-					@Override
-					public int compare(Empleado emp1, Empleado emp2) {
-
-						return emp1.getNombre().compareTo(emp2.getNombre());
-
-					}
-
-				});
-
-				for (Empleado empleado : plantilla3) {
-
-					System.out.println(empleado.toString());
-
-				}
-
-				break;
-
-			case 3:
-
-				Map<Clave, Empleado> plantilla4 = new TreeMap<>();
-				
-				plantilla4.put(e1.getClave(), e1);
-				
-				plantilla4.put(e2.getClave(), e2);
-
-				plantilla4.put(e3.getClave(), e3);
-
-				plantilla4.put(e4.getClave(), e4);
-
-				plantilla4.put(e5.getClave(), e5);
-
-				plantilla4.put(e6.getClave(), e6);
-
-				plantilla4.put(e7.getClave(), e7);
-
-				plantilla4.put(e8.getClave(), e8);
-
-				plantilla4.put(e9.getClave(), e9);
-
-				plantilla4.put(e1.getClave(), e1);
-
-				plantilla4.put(e5.getClave(), e5);
-
-				plantilla4.put(e6.getClave(), e6);
-
-				for (Map.Entry<Clave, Empleado> iteracion : plantilla4.entrySet()) {
-				    System.out.println(iteracion.getValue().toString());
-				}
-
-				break;
+				System.out.println(plantillaforeach.getValue().toString());
 
 			}
 
 		}
+		
+		} while (opcion != 4);
 
 	}
 
