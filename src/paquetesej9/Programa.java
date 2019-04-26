@@ -1,23 +1,7 @@
 package paquetesej9;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.time.*;
+import java.util.*;
 
 import static teclado.Teclado.*;
 
@@ -32,6 +16,16 @@ public class Programa {
 		int limiteinferior;
 
 		int limitesuperior;
+
+		List<Examen> lista;
+
+		Set<Examen> set;
+
+		Map<Clave, Examen> mapa;
+
+		ListIterator<Examen> it;
+
+		List<Examen> rango;
 
 		Examen ex1 = new Examen("Programacion", "Herencia y Colecciones", LocalDate.of(2017, Month.JUNE, 16),
 				LocalTime.of(8, 15), LocalTime.of(13, 30));
@@ -54,6 +48,10 @@ public class Programa {
 		Examen ex7 = new Examen("Base de datos", "Entidad-Relacion", LocalDate.of(2017, Month.JUNE, 15),
 				LocalTime.of(8, 15), LocalTime.of(11, 30));
 
+		Examen ex8 = new Examen(ex1);
+
+		Examen ex9 = new Examen(ex5);
+
 		while (opcion != 9) {
 
 			System.out.println(
@@ -65,27 +63,9 @@ public class Programa {
 
 			case 1:
 
-				List<Examen> examenes = new ArrayList<>();
+				lista = new ArrayList<>(List.of(ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8, ex9));
 
-				examenes.add(ex1);
-
-				examenes.add(ex2);
-
-				examenes.add(ex3);
-
-				examenes.add(ex4);
-
-				examenes.add(ex5);
-
-				examenes.add(ex6);
-
-				examenes.add(ex7);
-
-				examenes.add(ex1);
-
-				examenes.add(ex5);
-
-				for (Examen examen : examenes) {
+				for (Examen examen : lista) {
 
 					System.out.println(examen.toString());
 
@@ -95,27 +75,9 @@ public class Programa {
 
 			case 2:
 
-				Set<Examen> examenes2 = new LinkedHashSet<>();
+				set = new LinkedHashSet<>(List.of(ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8, ex9));
 
-				examenes2.add(ex1);
-
-				examenes2.add(ex2);
-
-				examenes2.add(ex3);
-
-				examenes2.add(ex4);
-
-				examenes2.add(ex5);
-
-				examenes2.add(ex6);
-
-				examenes2.add(ex7);
-
-				examenes2.add(ex1);
-
-				examenes2.add(ex5);
-
-				for (Examen examen : examenes2) {
+				for (Examen examen : set) {
 
 					System.out.println(examen.toString());
 
@@ -125,31 +87,13 @@ public class Programa {
 
 			case 3:
 
-				Set<Examen> examenes3 = new LinkedHashSet<>();
+				set = new LinkedHashSet<>(List.of(ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8, ex9));
 
-				examenes3.add(ex1);
+				it = new ArrayList<>(set).listIterator(set.size());
 
-				examenes3.add(ex2);
+				while (it.hasPrevious()) {
 
-				examenes3.add(ex3);
-
-				examenes3.add(ex4);
-
-				examenes3.add(ex5);
-
-				examenes3.add(ex6);
-
-				examenes3.add(ex7);
-
-				examenes3.add(ex1);
-
-				examenes3.add(ex5);
-
-				ListIterator<Examen> examenes4 = new ArrayList<>(examenes3).listIterator(examenes3.size());
-
-				while (examenes4.hasPrevious()) {
-
-					System.out.println(examenes4.previous().toString());
+					System.out.println(it.previous().toString());
 
 				}
 
@@ -157,31 +101,13 @@ public class Programa {
 
 			case 4:
 
-				Set<Examen> examenes5 = new LinkedHashSet<>();
+				set = new LinkedHashSet<>(List.of(ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8, ex9));
 
-				examenes5.add(ex1);
-
-				examenes5.add(ex2);
-
-				examenes5.add(ex3);
-
-				examenes5.add(ex4);
-
-				examenes5.add(ex5);
-
-				examenes5.add(ex6);
-
-				examenes5.add(ex7);
-
-				examenes5.add(ex1);
-
-				examenes5.add(ex5);
-
-				List<Examen> examenes6 = new ArrayList<>(examenes5);
+				rango = new ArrayList<>(set);
 
 				System.out.println("Introduce el limite superior");
 
-				limitesuperior = readRange(1, examenes6.size(), Rangos.AMBOSIN);
+				limitesuperior = readRange(1, rango.size(), Rangos.AMBOSIN);
 
 				System.out.println("Introduce el limite inferior");
 
@@ -189,7 +115,7 @@ public class Programa {
 
 				for (int i = limiteinferior - 1; i < limitesuperior; i++) {
 
-					System.out.println(examenes6.get(i).toString());
+					System.out.println(rango.get(i).toString());
 
 				}
 
@@ -197,27 +123,9 @@ public class Programa {
 
 			case 5:
 
-				Set<Examen> examenes7 = new TreeSet<>();
+				set = new TreeSet<>(List.of(ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8, ex9));
 
-				examenes7.add(ex1);
-
-				examenes7.add(ex2);
-
-				examenes7.add(ex3);
-
-				examenes7.add(ex4);
-
-				examenes7.add(ex5);
-
-				examenes7.add(ex6);
-
-				examenes7.add(ex7);
-
-				examenes7.add(ex1);
-
-				examenes7.add(ex5);
-
-				for (Examen examen : examenes7) {
+				for (Examen examen : set) {
 
 					System.out.println(examen.toString());
 
@@ -227,67 +135,45 @@ public class Programa {
 
 			case 6:
 
-				Set<Examen> examenes8 = new TreeSet<>();
+				// Lambda
 
-				examenes8.add(ex1);
+				set = new TreeSet<>((exa1, exa2) -> {
 
-				examenes8.add(ex2);
+					int resultado = exa2.getFecha().compareTo(exa1.getFecha());
 
-				examenes8.add(ex3);
+					if (resultado != 0) {
 
-				examenes8.add(ex4);
+						return resultado;
 
-				examenes8.add(ex5);
+					}
 
-				examenes8.add(ex6);
-
-				examenes8.add(ex7);
-
-				examenes8.add(ex1);
-
-				examenes8.add(ex5);
-
-				List<Examen> examenes9 = new ArrayList<>(examenes8);
-
-				// Clase anónima
-//					
-//					Collections.sort(examenes9, new Comparator<Examen>() {
-//			
-//						@Override
-//						public int compare(Examen examen1, Examen examen2) {
-//							
-//							
-//							LocalDateTime tiempo1 = LocalDateTime.of(examen1.getFecha().getYear(), examen1.getFecha().getMonth(), examen1.getFecha().getDayOfMonth(), examen1.getHorainicio().getHour(), examen1.getHorainicio().getMinute());
-//							
-//							LocalDateTime tiempo2 = LocalDateTime.of(examen2.getFecha().getYear(), examen2.getFecha().getMonth(), examen2.getFecha().getDayOfMonth(), examen2.getHorainicio().getHour(), examen2.getHorainicio().getMinute());
-//							
-//							return tiempo2.compareTo(tiempo1);
-//							
-//							
-//							
-//						}
-//						
-//						
-//						
-//					});
-
-				// 7. Lambda
-
-				examenes9.sort((examen1, examen2) -> {
-
-					LocalDateTime tiempo1 = LocalDateTime.of(examen1.getFecha().getYear(),
-							examen1.getFecha().getMonth(), examen1.getFecha().getDayOfMonth(),
-							examen1.getHorainicio().getHour(), examen1.getHorainicio().getMinute());
-
-					LocalDateTime tiempo2 = LocalDateTime.of(examen2.getFecha().getYear(),
-							examen2.getFecha().getMonth(), examen2.getFecha().getDayOfMonth(),
-							examen2.getHorainicio().getHour(), examen2.getHorainicio().getMinute());
-
-					return tiempo2.compareTo(tiempo1);
+					return exa2.getHorainicio().compareTo(exa1.getHorainicio());
 
 				});
 
-				for (Examen examen : examenes9) {
+				// Clase anónima
+//				set = new TreeSet<>(new Comparator<Examen>() {
+//
+//					@Override
+//					public int compare(Examen exa1, Examen exa2) {
+//						int resultado = exa2.getFecha().compareTo(exa1.getFecha());
+//
+//						if (resultado != 0) {
+//
+//							return resultado;
+//
+//						}
+//
+//						return exa2.getHorainicio().compareTo(exa1.getHorainicio());
+//					}
+//					
+//					
+//					
+//				});
+
+				set = Set.of(ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8, ex9);
+
+				for (Examen examen : set) {
 
 					System.out.println(examen.toString());
 
@@ -297,29 +183,16 @@ public class Programa {
 
 			case 7:
 
-				Map<String, Examen> examenes10 = new LinkedHashMap<>();
+				mapa = new LinkedHashMap<>(Map.of(ex1.getClave(), ex1, ex2.getClave(), ex2, ex3.getClave(), ex3,
+						ex4.getClave(), ex4, ex5.getClave(), ex5, ex6.getClave(), ex6, ex7.getClave(), ex7));
 
-				examenes10.put(ex1.getClave().toString(), ex1);
+				mapa.put(ex8.getClave(), ex8);
 
-				examenes10.put(ex2.getClave().toString(), ex2);
+				mapa.put(ex9.getClave(), ex9);
 
-				examenes10.put(ex3.getClave().toString(), ex3);
+				for (Map.Entry<Clave, Examen> examen : mapa.entrySet()) {
 
-				examenes10.put(ex4.getClave().toString(), ex4);
-
-				examenes10.put(ex5.getClave().toString(), ex5);
-
-				examenes10.put(ex6.getClave().toString(), ex6);
-
-				examenes10.put(ex7.getClave().toString(), ex7);
-
-				examenes10.put(ex1.getClave().toString(), ex1);
-
-				examenes10.put(ex5.getClave().toString(), ex5);
-
-				for (Map.Entry<String, Examen> Examen : examenes10.entrySet()) {
-
-					System.out.println(Examen.getValue().toString());
+					System.out.println(examen.getValue().toString());
 
 				}
 
@@ -327,27 +200,15 @@ public class Programa {
 
 			case 8:
 
-				Map<String, Examen> examenes11 = new TreeMap<>();
+				mapa = new TreeMap<>(
+						mapa = new LinkedHashMap<>(Map.of(ex1.getClave(), ex1, ex2.getClave(), ex2, ex3.getClave(), ex3,
+								ex4.getClave(), ex4, ex5.getClave(), ex5, ex6.getClave(), ex6, ex7.getClave(), ex7)));
 
-				examenes11.put(ex1.getClave().toString(), ex1);
+				mapa.put(ex8.getClave(), ex8);
 
-				examenes11.put(ex2.getClave().toString(), ex2);
+				mapa.put(ex9.getClave(), ex9);
 
-				examenes11.put(ex3.getClave().toString(), ex3);
-
-				examenes11.put(ex4.getClave().toString(), ex4);
-
-				examenes11.put(ex5.getClave().toString(), ex5);
-
-				examenes11.put(ex6.getClave().toString(), ex6);
-
-				examenes11.put(ex7.getClave().toString(), ex7);
-
-				examenes11.put(ex1.getClave().toString(), ex1);
-
-				examenes11.put(ex5.getClave().toString(), ex5);
-
-				for (Map.Entry<String, Examen> Examen : examenes11.entrySet()) {
+				for (Map.Entry<Clave, Examen> Examen : mapa.entrySet()) {
 
 					System.out.println(Examen.getValue().toString());
 

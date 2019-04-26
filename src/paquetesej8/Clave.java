@@ -4,7 +4,7 @@ public class Clave implements Comparable<Clave> {
 	
 	private Genero genero;
 	
-	private Integer numero;
+	private int numero;
 	
 	Clave(Genero genero, Integer numero) {
 		
@@ -36,48 +36,15 @@ public class Clave implements Comparable<Clave> {
 	@Override
 	public int compareTo(Clave clave) {
 		
-		if (getGenero().getCodigo() == 'F' && clave.getGenero().getCodigo() == 'T') {
+		int resultado = getGenero().compareTo(clave.getGenero());
+		
+		if (resultado != 0) {
 			
-			return -1;
+			return resultado;
 			
 		}
 		
-		else if (getGenero().getCodigo() == 'F' && clave.getGenero().getCodigo() == 'C') {
-				
-				return -1;
-				
-			}
-		
-		else if (getGenero().getCodigo() == 'T' && clave.getGenero().getCodigo() == 'C') {
-			
-			return -1;
-			
-		}
-		
-		else if (getGenero().getCodigo() == 'T' && clave.getGenero().getCodigo() == 'F') {
-			
-			return 1;
-			
-		}
-		
-		else if (getGenero().getCodigo() == 'C' && clave.getGenero().getCodigo() == 'F') {
-			
-			return 1;
-			
-		}
-		
-		else if (getGenero().getCodigo() == 'C' && clave.getGenero().getCodigo() == 'T') {
-			
-			return 1;
-			
-		}
-		
-		else {
-			
-			return getNumero().compareTo(clave.getNumero());
-			
-			
-		}
+		return (int)Integer.compare(getNumero(), clave.getNumero());
 		
 	}
 	

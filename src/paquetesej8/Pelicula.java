@@ -94,7 +94,7 @@ public class Pelicula implements Comparable<Pelicula> {
 
 	}
 	
-	Integer numdias () {
+	int numdias () {
 		
 		return (int)ChronoUnit.DAYS.between(fechaestreno, fechaDVD);
 		
@@ -129,7 +129,7 @@ public class Pelicula implements Comparable<Pelicula> {
 	@Override
 	public int compareTo(Pelicula peli) {
 		
-		int resultado = Integer.compare(numdias(), peli.numdias());
+		int resultado = Integer.compare(peli.numdias(), numdias());
 		
 		if (resultado != 0) {
 			

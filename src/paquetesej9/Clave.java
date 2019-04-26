@@ -4,13 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Clave {
+public class Clave implements Comparable<Clave> {
 
-	DateTimeFormatter horaFormateada = DateTimeFormatter.ofPattern("HH:mm");
+	private LocalDate dia;
 
-	LocalDate dia;
-
-	LocalTime hora;
+	private LocalTime hora;
 
 	Clave(LocalDate dia, LocalTime hora) {
 
@@ -22,16 +20,25 @@ public class Clave {
 
 	public String toString() {
 
+		DateTimeFormatter horaFormateada = DateTimeFormatter.ofPattern("HH:mm");
+
 		return String.format("%s-%s", String.valueOf(getDia().getDayOfMonth()), horaFormateada.format(getHora()));
 
 	}
 
-	LocalDate getDia() {
+	private LocalDate getDia() {
 		return dia;
 	}
 
-	LocalTime getHora() {
+	private LocalTime getHora() {
 		return hora;
+	}
+
+	@Override
+	public int compareTo(Clave clave) {
+
+		return toString().compareTo(clave.toString());
+
 	}
 
 }

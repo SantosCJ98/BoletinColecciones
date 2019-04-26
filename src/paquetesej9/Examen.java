@@ -7,46 +7,17 @@ import java.time.format.DateTimeFormatter;
 
 public class Examen implements Comparable<Examen> {
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((clave == null) ? 0 : clave.hashCode());
-		return result;
-	}
+	private String asignatura;
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Examen))
-			return false;
-		Examen other = (Examen) obj;
-		if (clave == null) {
-			if (other.clave != null)
-				return false;
-		} else if (!clave.equals(other.clave))
-			return false;
-		return true;
-	}
+	private String descripcion;
 
-	DateTimeFormatter horaFormateada = DateTimeFormatter.ofPattern("HH:mm");
+	private LocalDate fecha;
 
-	DateTimeFormatter fechaFormateada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	private LocalTime horainicio;
 
-	String asignatura;
+	private LocalTime horafin;
 
-	String descripcion;
-
-	LocalDate fecha;
-
-	LocalTime horainicio;
-
-	LocalTime horafin;
-
-	Clave clave;
+	private Clave clave;
 
 	Examen(String asignatura, String descripcion, LocalDate fecha, LocalTime horainicio, LocalTime horafin) {
 
@@ -63,8 +34,28 @@ public class Examen implements Comparable<Examen> {
 		this.clave = new Clave(fecha, horainicio);
 
 	}
+	
+	Examen(Examen original) {
+		
+		asignatura = original.asignatura;
+		
+		descripcion = original.descripcion;
+		
+		fecha = original.fecha;
+		
+		horainicio = original.horainicio;
+		
+		horafin = original.horafin;
+		
+		clave = original.clave;
+		
+	}
 
 	public String toString() {
+		
+		DateTimeFormatter horaFormateada = DateTimeFormatter.ofPattern("HH:mm");
+
+		DateTimeFormatter fechaFormateada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 		return String.format("%-30s%-30s%-30s%-30s%-30s%-30s", getAsignatura(), getDescripcion(),
 				fechaFormateada.format(getFecha()), horaFormateada.format(horainicio), horaFormateada.format(horafin),
@@ -96,20 +87,19 @@ public class Examen implements Comparable<Examen> {
 		return clave;
 	}
 
-	// Apartado 5
 
 	@Override
 	public int compareTo(Examen examen) {
 
-		int comp_asig = this.getAsignatura().compareTo(examen.getAsignatura());
+		int comp_asig = getAsignatura().compareTo(examen.getAsignatura());
 
-		int comp_fecha = this.getFecha().compareTo(examen.getFecha());
+		int comp_fecha = getFecha().compareTo(examen.getFecha());
 
-		int comp_hora = this.getHorainicio().compareTo(examen.getHorainicio());
+		int comp_hora = getHorainicio().compareTo(examen.getHorainicio());
 
 		if (comp_asig == 0) {
 
-			if (comp_asig == 0 && comp_fecha == 0) {
+			if (comp_fecha == 0) {
 
 				return comp_hora;
 
@@ -129,6 +119,31 @@ public class Examen implements Comparable<Examen> {
 
 		}
 
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((clave == null) ? 0 : clave.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Examen))
+			return false;
+		Examen other = (Examen) obj;
+		if (clave == null) {
+			if (other.clave != null)
+				return false;
+		} else if (!clave.equals(other.clave))
+			return false;
+		return true;
 	}
 
 }

@@ -38,9 +38,9 @@ public class Videoclub {
 		
 		Set<Pelicula> videoclub;
 		
-		Map<Clave, String> videoclub2;
+		Map<Clave, Pelicula> videoclub2;
 		
-		Iterator<String> it;
+		Iterator<Pelicula> it;
 
 		do {
 		
@@ -143,25 +143,25 @@ public class Videoclub {
 
 			videoclub2 = new TreeMap<>();
 
-			videoclub2.put(p1.getClave(), p1.toString());
+			videoclub2.put(p1.getClave(), p1);
 
-			videoclub2.put(p2.getClave(), p2.toString());
+			videoclub2.put(p2.getClave(), p2);
 
-			videoclub2.put(p3.getClave(), p3.toString());
+			videoclub2.put(p3.getClave(), p3);
 
-			videoclub2.put(p4.getClave(), p4.toString());
+			videoclub2.put(p4.getClave(), p4);
 
-			videoclub2.put(p5.getClave(), p5.toString());
+			videoclub2.put(p5.getClave(), p5);
 
-			videoclub2.put(p6.getClave(), p6.toString());
+			videoclub2.put(p6.getClave(), p6);
 
-			videoclub2.put(p7.getClave(), p7.toString());
+			videoclub2.put(p7.getClave(), p7);
 
-			videoclub2.put(p8.getClave(), p8.toString());
+			videoclub2.put(p8.getClave(), p8);
 
-			for (Map.Entry<Clave, String> pelicula : videoclub2.entrySet()) {
+			for (Map.Entry<Clave, Pelicula> pelicula : videoclub2.entrySet()) {
 
-				System.out.println(pelicula.getValue());
+				System.out.println(pelicula.getValue().toString());
 
 			}
 
@@ -171,27 +171,27 @@ public class Videoclub {
 
 			videoclub2 = new TreeMap<>(Collections.reverseOrder());
 
-			videoclub2.put(p1.getClave(), p1.toString());
+			videoclub2.put(p1.getClave(), p1);
 
-			videoclub2.put(p2.getClave(), p2.toString());
+			videoclub2.put(p2.getClave(), p2);
 
-			videoclub2.put(p3.getClave(), p3.toString());
+			videoclub2.put(p3.getClave(), p3);
 
-			videoclub2.put(p4.getClave(), p4.toString());
+			videoclub2.put(p4.getClave(), p4);
 
-			videoclub2.put(p5.getClave(), p5.toString());
+			videoclub2.put(p5.getClave(), p5);
 
-			videoclub2.put(p6.getClave(), p6.toString());
+			videoclub2.put(p6.getClave(), p6);
 
-			videoclub2.put(p7.getClave(), p7.toString());
+			videoclub2.put(p7.getClave(), p7);
 
-			videoclub2.put(p8.getClave(), p8.toString());
+			videoclub2.put(p8.getClave(), p8);
 
 			it = videoclub2.values().iterator();
 			
 			while (it.hasNext()) {
 				
-				System.out.println(it.next());
+				System.out.println(it.next().toString());
 				
 			}
 			

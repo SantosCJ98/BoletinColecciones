@@ -2,7 +2,7 @@ package paquetesej8;
 
 public enum Genero {
 
-	COMEDIA('C'), FICCION('F'), TERROR('T');
+	FICCION('F'), TERROR('T'), COMEDIA('C');
 
 	Genero(char codigo) {
 
