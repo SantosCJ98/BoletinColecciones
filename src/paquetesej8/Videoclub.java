@@ -40,7 +40,9 @@ public class Videoclub {
 		
 		Map<Clave, Pelicula> videoclub2;
 		
-		Iterator<Pelicula> it;
+		List<Pelicula> lista;
+		
+		ListIterator<Pelicula> it;
 
 		do {
 		
@@ -53,23 +55,7 @@ public class Videoclub {
 
 		case 1:
 
-			videoclub = new LinkedHashSet<>();
-
-			videoclub.add(p1);
-
-			videoclub.add(p2);
-
-			videoclub.add(p3);
-
-			videoclub.add(p4);
-
-			videoclub.add(p5);
-
-			videoclub.add(p6);
-
-			videoclub.add(p7);
-
-			videoclub.add(p8);
+			videoclub = new LinkedHashSet<>(List.of(p1, p2, p3, p4, p5, p6 , p7, p8));
 
 			for (Pelicula pelicula : videoclub) {
 
@@ -81,23 +67,7 @@ public class Videoclub {
 
 		case 2:
 
-			videoclub = new TreeSet<>();
-
-			videoclub.add(p1);
-
-			videoclub.add(p2);
-
-			videoclub.add(p3);
-
-			videoclub.add(p4);
-
-			videoclub.add(p5);
-
-			videoclub.add(p6);
-
-			videoclub.add(p7);
-
-			videoclub.add(p8);
+			videoclub = new TreeSet<>(List.of(p1, p2, p3, p4, p5, p6 , p7, p8));
 
 			for (Pelicula pelicula : videoclub) {
 
@@ -109,29 +79,19 @@ public class Videoclub {
 
 		case 3:
 
-			videoclub = new TreeSet<>((peli1, peli2) -> {
+			videoclub = new TreeSet<>(List.of(p1, p2, p3, p4, p5, p6 , p7, p8));
 
+			lista = new ArrayList<>(videoclub);
+			
+			Collections.sort(lista, (peli1, peli2) -> {
+				
 				return peli1.getFechaestreno().compareTo(peli2.getFechaestreno());
-
+				
 			});
+			
+			
 
-			videoclub.add(p1);
-
-			videoclub.add(p2);
-
-			videoclub.add(p3);
-
-			videoclub.add(p4);
-
-			videoclub.add(p5);
-
-			videoclub.add(p6);
-
-			videoclub.add(p7);
-
-			videoclub.add(p8);
-
-			for (Pelicula pelicula : videoclub) {
+			for (Pelicula pelicula : lista) {
 
 				System.out.println(pelicula.toString());
 
@@ -141,22 +101,10 @@ public class Videoclub {
 
 		case 4:
 
-			videoclub2 = new TreeMap<>();
-
-			videoclub2.put(p1.getClave(), p1);
-
-			videoclub2.put(p2.getClave(), p2);
-
-			videoclub2.put(p3.getClave(), p3);
-
-			videoclub2.put(p4.getClave(), p4);
-
-			videoclub2.put(p5.getClave(), p5);
-
-			videoclub2.put(p6.getClave(), p6);
+			videoclub2 = new TreeMap<>(Map.of(p1.getClave(), p1, p2.getClave(), p2, p3.getClave(), p3, p4.getClave(), p4, p5.getClave(), p5, p6.getClave(), p6));
 
 			videoclub2.put(p7.getClave(), p7);
-
+			
 			videoclub2.put(p8.getClave(), p8);
 
 			for (Map.Entry<Clave, Pelicula> pelicula : videoclub2.entrySet()) {
@@ -169,29 +117,19 @@ public class Videoclub {
 
 		case 5:
 
-			videoclub2 = new TreeMap<>(Collections.reverseOrder());
-
-			videoclub2.put(p1.getClave(), p1);
-
-			videoclub2.put(p2.getClave(), p2);
-
-			videoclub2.put(p3.getClave(), p3);
-
-			videoclub2.put(p4.getClave(), p4);
-
-			videoclub2.put(p5.getClave(), p5);
-
-			videoclub2.put(p6.getClave(), p6);
+			videoclub2 = new TreeMap<>(Map.of(p1.getClave(), p1, p2.getClave(), p2, p3.getClave(), p3, p4.getClave(), p4, p5.getClave(), p5, p6.getClave(), p6));
 
 			videoclub2.put(p7.getClave(), p7);
 
 			videoclub2.put(p8.getClave(), p8);
-
-			it = videoclub2.values().iterator();
 			
-			while (it.hasNext()) {
+			lista = new ArrayList<>(videoclub2.values());
+
+			it = lista.listIterator(lista.size());
+			
+			while (it.hasPrevious()) {
 				
-				System.out.println(it.next().toString());
+				System.out.println(it.previous().toString());
 				
 			}
 			

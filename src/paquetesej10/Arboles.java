@@ -13,6 +13,8 @@ public class Arboles {
 		int opcion = 0;
 
 		Set<Empleado> arbol;
+		
+		List<Empleado> arbol2;
 
 		Map<Clave, Empleado> mapa;
 
@@ -55,13 +57,7 @@ public class Arboles {
 
 		case 1:
 
-			arbol = new TreeSet<>(Set.of(e1, e2, e3, e4, e5, e6, e7, e8, e9));
-
-			arbol.add(e10);
-
-			arbol.add(e11);
-
-			arbol.add(e12);
+			arbol = new TreeSet<>(List.of(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12));
 
 			for (Empleado empleado : arbol) {
 
@@ -73,18 +69,19 @@ public class Arboles {
 
 		case 2:
 
-			arbol = new TreeSet<>((emp1, emp2) -> {
-
-				return emp2.getNombre().compareTo(emp1.getNombre());
-
+			arbol = new TreeSet<>(List.of(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12));
+			
+			arbol2 = new ArrayList<>(arbol);
+			
+			Collections.sort(arbol2, (emp1, emp2) -> {
+				
+				return emp1.getNombre().compareTo(emp2.getNombre());
+				
 			});
-
-			arbol = Set.of(e1, e2, e3, e4, e5, e6, e7, e8, e9);
 			
-			//No permite introducir duplicados
 			
 
-			for (Empleado empleado : arbol) {
+			for (Empleado empleado : arbol2) {
 
 				System.out.println(empleado.toString());
 
