@@ -9,6 +9,8 @@ import static teclado.Teclado.*;
 public class Arboles {
 
 	public static void menu() {
+		
+		Comparator<Empleado> pornombre = Comparator.comparing(empleado -> empleado.getNombre());
 
 		int opcion = 0;
 
@@ -69,19 +71,11 @@ public class Arboles {
 
 		case 2:
 
-			arbol = new TreeSet<>(List.of(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12));
+			arbol = new TreeSet<>(pornombre);
 			
-			arbol2 = new ArrayList<>(arbol);
-			
-			Collections.sort(arbol2, (emp1, emp2) -> {
-				
-				return emp1.getNombre().compareTo(emp2.getNombre());
-				
-			});
-			
-			
+			arbol.addAll(List.of(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12));
 
-			for (Empleado empleado : arbol2) {
+			for (Empleado empleado : arbol) {
 
 				System.out.println(empleado.toString());
 

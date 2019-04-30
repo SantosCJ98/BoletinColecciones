@@ -26,6 +26,12 @@ public class Programa {
 		ListIterator<Examen> it;
 
 		List<Examen> rango;
+		
+		Comparator<Examen> ordenarfecha = Comparator.comparing(examen -> examen.getFecha());
+		
+		Comparator<Examen> ordenarhora = Comparator.comparing(examen -> examen.getHorainicio());
+		
+		Comparator<Examen> ordenarfechayhora = ordenarfecha.thenComparing(ordenarhora);
 
 		Examen ex1 = new Examen("Programacion", "Herencia y Colecciones", LocalDate.of(2017, Month.JUNE, 16),
 				LocalTime.of(8, 15), LocalTime.of(13, 30));
@@ -135,21 +141,21 @@ public class Programa {
 
 			case 6:
 
-				// Lambda
-
-				set = new TreeSet<>((exa1, exa2) -> {
-
-					int resultado = exa2.getFecha().compareTo(exa1.getFecha());
-
-					if (resultado != 0) {
-
-						return resultado;
-
-					}
-
-					return exa2.getHorainicio().compareTo(exa1.getHorainicio());
-
-				});
+//				// Lambda
+//
+//				set = new TreeSet<>((exa1, exa2) -> {
+//
+//					int resultado = exa2.getFecha().compareTo(exa1.getFecha());
+//
+//					if (resultado != 0) {
+//
+//						return resultado;
+//
+//					}
+//
+//					return exa2.getHorainicio().compareTo(exa1.getHorainicio());
+//
+//				});
 
 				// Clase anónima
 //				set = new TreeSet<>(new Comparator<Examen>() {
@@ -170,8 +176,13 @@ public class Programa {
 //					
 //					
 //				});
+				
+				//Ejercicio 11
+				
+				set = new TreeSet<>(ordenarfechayhora);
+				
 
-				set = Set.of(ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8, ex9);
+				set.addAll(List.of(ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8, ex9));
 
 				for (Examen examen : set) {
 
